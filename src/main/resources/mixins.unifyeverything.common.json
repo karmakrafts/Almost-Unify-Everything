@@ -1,0 +1,13 @@
+{
+  "package": "io.karma.unifyeverything.mixin",
+  "required": true,
+  "refmap": "mixins.unifyeverything.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_17",
+  "injectors": {
+    "maxShiftBy": 100
+  },
+  "mixins": [
+  ]
+}
