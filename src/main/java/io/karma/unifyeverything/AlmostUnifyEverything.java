@@ -135,11 +135,12 @@ public class AlmostUnifyEverything {
                     }
 
                     final var numberUnified = unifyInventory(container);
-                    blockEntity.setChanged();
-                    unifiedItems += numberUnified;
-                    sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items_at", MODID),
-                        numberUnified,
-                        blockEntityPos.toShortString()));
+                    if (numberUnified > 0) {
+                        blockEntity.setChanged();
+                        unifiedItems += numberUnified;
+                        sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items_at",
+                            MODID), numberUnified, blockEntityPos.toShortString()));
+                    }
                 }
             }
         }
