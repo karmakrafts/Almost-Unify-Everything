@@ -90,6 +90,9 @@ dependencies {
 
     compileOnly(fg.deobf(libs.jei.forge.api.get().toString()))
     runtimeOnly(fg.deobf(libs.jei.forge.core.get().toString()))
+    runtimeOnly(fg.deobf(libs.cofhCore.get().toString()))
+    runtimeOnly(fg.deobf(libs.thermal.foundation.get().toString()))
+    runtimeOnly(fg.deobf(libs.railcraft.get().toString()))
 
     testImplementation(libs.junit.api)
     testRuntimeOnly(libs.junit.engine)

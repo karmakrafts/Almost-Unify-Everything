@@ -1,0 +1,5 @@
+{
+  "message.unifyeverything.unified_items": "Unified %d items",
+  "message.unifyeverything.unified_items_in": "Unified %d items in %s",
+  "message.unifyeverything.performance_warning": "The server might lag for a moment, please wait"
+}

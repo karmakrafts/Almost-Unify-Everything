@@ -11,6 +11,9 @@ librarian = "1.2.0" # https://github.com/ParchmentMC/Librarian/tags
 architectury = "5137938" # https://www.curseforge.com/minecraft/mc-mods/architectury-api/files/all
 almostUnified = "1.20.1-0.9.3" # https://maven.blamejared.com/com/almostreliable/mods/almostunified-common/
 jei = "15.20.0.104" # https://maven.blamejared.com/mezz/jei/jei-1.20.1-forge/
+railcraft = "5650737" # https://www.curseforge.com/minecraft/mc-mods/railcraft-reborn/files/all?page=1&pageSize=20
+cofhCore = "5374122" # https://www.curseforge.com/minecraft/mc-mods/cofh-core/files/all?page=1&pageSize=20
+thermalFoundation = "5443583" # https://www.curseforge.com/minecraft/mc-mods/thermal-foundation/files/all?page=1&pageSize=20
 embeddium = "0.3.30-beta.48+mc1.20.1" # https://maven.blamejared.com/org/embeddedt/
 oculus = "5299671" # https://www.curseforge.com/minecraft/mc-mods/oculus/files/all?page=1&pageSize=20
 
@@ -24,6 +27,9 @@ architectury = { module = "curse.maven:architectury-api-419699", version.ref = "
 almostUnified-forge = { module = "com.almostreliable.mods:almostunified-forge", version.ref = "almostUnified" }
 jei-forge-core = { module = "mezz.jei:jei-1.20.1-forge", version.ref = "jei" }
 jei-forge-api = { module = "mezz.jei:jei-1.20.1-forge-api", version.ref = "jei" }
+cofhCore = { module = "curse.maven:cofh-core-69162", version.ref = "cofhCore" }
+thermal-foundation = { module = "curse.maven:thermal-foundation-222880", version.ref = "thermalFoundation" }
+railcraft = { module = "curse.maven:railcraft-reborn-901491", version.ref = "railcraft" }
 embeddium = { module = "org.embeddedt:embeddium-1.20.1", version.ref = "embeddium" }
 oculus = { module = "curse.maven:oculus-581495", version.ref = "oculus" }
 

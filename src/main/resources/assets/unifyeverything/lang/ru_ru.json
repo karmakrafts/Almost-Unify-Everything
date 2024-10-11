@@ -1,0 +1,5 @@
+{
+  "message.unifyeverything.unified_items": "Унифицированные %d предмета",
+  "message.unifyeverything.unified_items_in": "Объединенные %d предмета в %s",
+  "message.unifyeverything.performance_warning": "Сервер может зависнуть на некоторое время, пожалуйста, подождите"
+}

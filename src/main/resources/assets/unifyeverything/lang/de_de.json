@@ -1,0 +1,5 @@
+{
+  "message.unifyeverything.unified_items": "%d Items wurden unifiziert",
+  "message.unifyeverything.unified_items_in": "%d Items in %s wurden unifiziert",
+  "message.unifyeverything.performance_warning": "Der Server laggt vielleicht für einen Moment, bitte hab etwas Geduld"
+}

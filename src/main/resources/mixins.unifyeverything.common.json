@@ -9,5 +9,6 @@
     "maxShiftBy": 100
   },
   "mixins": [
+    "BlockStateBaseMixin"
   ]
 }
