@@ -1,5 +1,6 @@
 {
   "message.unifyeverything.unified_items": "Sjednocené %d položky",
   "message.unifyeverything.unified_items_in": "Sjednocené %d položky v %s",
+  "message.unifyeverything.unified_items_at": "Sjednocené %d položky na %s",
   "message.unifyeverything.performance_warning": "Server se může na chvíli zpozdit, vyčkejte prosím."
 }

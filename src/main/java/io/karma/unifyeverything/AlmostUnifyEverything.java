@@ -17,6 +17,7 @@ package io.karma.unifyeverything;
 
 import com.almostreliable.unified.api.AlmostUnifiedLookup;
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
@@ -60,14 +61,23 @@ public class AlmostUnifyEverything {
     public static int unifyInventory(final Container container) {
         var unifiedItems = 0;
         for (var i = 0; i < container.getContainerSize(); ++i) {
-            container.setItem(i, unify(container.getItem(i)));
+            final var input = container.getItem(i);
+            final var output = unify(input);
+            if (input.getItem() == output.getItem()) {
+                continue;
+            }
+            container.setItem(i, output);
             ++unifiedItems;
         }
         return unifiedItems;
     }
 
-    private int unifyInventory(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        final var player = context.getSource().getPlayerOrException();
+    private int unifyInventory(final CommandContext<CommandSourceStack> context) {
+        final var player = context.getSource().getPlayer();
+        if (player == null) {
+            return 0;
+        }
+
         final var unifiedItems = unifyInventory(player.getInventory());
         player.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items", MODID),
             unifiedItems));
@@ -76,6 +86,8 @@ public class AlmostUnifyEverything {
 
     private int unifyPlayersIn(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         final var sender = context.getSource().getPlayerOrException();
+        sender.sendSystemMessage(Component.translatable(String.format("message.%s.performance_warning", MODID)));
+
         final var server = context.getSource().getServer();
         final var dimension = context.getArgument("dimension", ResourceLocation.class);
         final var dimensionKey = ResourceKey.create(Registries.DIMENSION, dimension);
@@ -83,7 +95,7 @@ public class AlmostUnifyEverything {
         if (level == null) {
             return 0; // This should never happen
         }
-        sender.sendSystemMessage(Component.translatable(String.format("message.%s.performance_warning", MODID)));
+
         var unifiedItems = 0;
         for (final var player : level.getPlayers(player -> true)) {
             unifiedItems += unifyInventory(player.getInventory());
@@ -91,6 +103,46 @@ public class AlmostUnifyEverything {
         sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items_in", MODID),
             unifiedItems,
             dimension));
+
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private int unifyInventoriesInRange(final CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+
+        final var sender = context.getSource().getPlayerOrException();
+        final var level = sender.level();
+        sender.sendSystemMessage(Component.translatable(String.format("message.%s.performance_warning", MODID)));
+
+        final var pos = sender.getOnPos();
+        final var range = (int) context.getArgument("rangeInChunks", Integer.class);
+
+        var unifiedItems = 0;
+        final var centerChunkPos = level.getChunk(pos).getPos();
+
+        for (var zOffset = -range; zOffset < range; ++zOffset) {
+            for (var xOffset = -range; xOffset < range; ++xOffset) {
+                final var chunkX = centerChunkPos.x + xOffset;
+                final var chunkZ = centerChunkPos.z + zOffset;
+                final var chunk = level.getChunk(chunkX, chunkZ);
+                for (final var blockEntityPos : chunk.getBlockEntitiesPos()) {
+                    final var blockEntity = chunk.getExistingBlockEntity(blockEntityPos);
+                    if (!(blockEntity instanceof Container container)) {
+                        continue;
+                    }
+
+                    final var numberUnified = unifyInventory(container);
+                    blockEntity.setChanged();
+                    unifiedItems += numberUnified;
+                    sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items_at", MODID),
+                        numberUnified,
+                        blockEntityPos.toShortString()));
+                }
+            }
+        }
+
+        sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items", MODID),
+            unifiedItems));
+
         return Command.SINGLE_SUCCESS;
     }
 
@@ -99,13 +151,19 @@ public class AlmostUnifyEverything {
         event.getDispatcher().register(LiteralArgumentBuilder.<CommandSourceStack>literal(MODID)
             .then(
                 LiteralArgumentBuilder.<CommandSourceStack>literal("unify")
-                    .executes(this::unifyInventory)
                     .then(
                         LiteralArgumentBuilder.<CommandSourceStack>literal("playersin").then(
                             RequiredArgumentBuilder.<CommandSourceStack, ResourceLocation>argument("dimension", DimensionArgument.dimension())
                                 .executes(this::unifyPlayersIn)
                         )
                     )
+                    .then(
+                        LiteralArgumentBuilder.<CommandSourceStack>literal("all").then(
+                            RequiredArgumentBuilder.<CommandSourceStack, Integer>argument("rangeInChunks", IntegerArgumentType.integer())
+                                .executes(this::unifyInventoriesInRange)
+                        )
+                    )
+                    .executes(this::unifyInventory)
             ));
         // @formatter:on
     }
