@@ -1,10 +1,6 @@
 stages:
   - build
 
-before_script:
-  - export JAVA_HOME=/home/sdks/zulu-17
-  - export GRADLE_USER_HOME=`pwd`/.gradle
-
 cache:
   paths:
     - .gradle/wrapper
