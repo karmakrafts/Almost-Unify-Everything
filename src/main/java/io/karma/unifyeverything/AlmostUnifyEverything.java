@@ -79,8 +79,10 @@ public class AlmostUnifyEverything {
         }
 
         final var unifiedItems = unifyInventory(player.getInventory());
-        player.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items", MODID),
-            unifiedItems));
+        if (unifiedItems > 0) {
+            player.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items", MODID),
+                unifiedItems));
+        }
         return Command.SINGLE_SUCCESS;
     }
 
@@ -100,9 +102,11 @@ public class AlmostUnifyEverything {
         for (final var player : level.getPlayers(player -> true)) {
             unifiedItems += unifyInventory(player.getInventory());
         }
-        sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items_in", MODID),
-            unifiedItems,
-            dimension));
+        if (unifiedItems > 0) {
+            sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items_in", MODID),
+                unifiedItems,
+                dimension));
+        }
 
         return Command.SINGLE_SUCCESS;
     }
@@ -140,8 +144,10 @@ public class AlmostUnifyEverything {
             }
         }
 
-        sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items", MODID),
-            unifiedItems));
+        if (unifiedItems > 0) {
+            sender.sendSystemMessage(Component.translatable(String.format("message.%s.unified_items", MODID),
+                unifiedItems));
+        }
 
         return Command.SINGLE_SUCCESS;
     }
