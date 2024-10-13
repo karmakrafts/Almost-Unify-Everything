@@ -127,6 +127,11 @@ public class AlmostUnifyEverything {
             for (var xOffset = -range; xOffset < range; ++xOffset) {
                 final var chunkX = centerChunkPos.x + xOffset;
                 final var chunkZ = centerChunkPos.z + zOffset;
+
+                if(!level.hasChunk(chunkX, chunkZ)) {
+                    continue; // Skip any chunks that don't exist yet, we are not a world generator!
+                }
+
                 final var chunk = level.getChunk(chunkX, chunkZ);
                 for (final var blockEntityPos : chunk.getBlockEntitiesPos()) {
                     final var blockEntity = chunk.getExistingBlockEntity(blockEntityPos);
