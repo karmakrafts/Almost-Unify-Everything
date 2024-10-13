@@ -122,13 +122,19 @@ public class AlmostUnifyEverything {
 
         var unifiedItems = 0;
         final var centerChunkPos = level.getChunk(pos).getPos();
+        final var fullRange = range << 1;
+        final var numChunks = fullRange * fullRange;
+        var chunkIndex = 0;
 
         for (var zOffset = -range; zOffset < range; ++zOffset) {
             for (var xOffset = -range; xOffset < range; ++xOffset) {
                 final var chunkX = centerChunkPos.x + xOffset;
                 final var chunkZ = centerChunkPos.z + zOffset;
 
-                if(!level.hasChunk(chunkX, chunkZ)) {
+                if (!level.hasChunk(chunkX, chunkZ)) {
+                    sender.sendSystemMessage(Component.translatable(String.format("message.%s.processed_chunk_at",
+                        MODID), chunkIndex + 1, numChunks, chunkX, chunkZ));
+                    ++chunkIndex;
                     continue; // Skip any chunks that don't exist yet, we are not a world generator!
                 }
 
@@ -147,6 +153,12 @@ public class AlmostUnifyEverything {
                             MODID), numberUnified, blockEntityPos.toShortString()));
                     }
                 }
+                sender.sendSystemMessage(Component.translatable(String.format("message.%s.processed_chunk_at", MODID),
+                    chunkIndex + 1,
+                    numChunks,
+                    chunkX,
+                    chunkZ));
+                ++chunkIndex;
             }
         }
 

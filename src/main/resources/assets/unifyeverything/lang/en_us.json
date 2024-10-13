@@ -2,5 +2,6 @@
   "message.unifyeverything.unified_items": "Unified %d items",
   "message.unifyeverything.unified_items_in": "Unified %d items in %s",
   "message.unifyeverything.unified_items_at": "Unified %d items at %s",
-  "message.unifyeverything.performance_warning": "The server might lag for a moment, please wait"
+  "message.unifyeverything.performance_warning": "The server might lag for a moment, please wait",
+  "message.unifyeverything.processed_chunk_at": "Processed chunk %d/%d at [%d, %d]"
 }
