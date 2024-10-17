@@ -7,6 +7,8 @@ forge = "47.2.30" # https://files.minecraftforge.net/net/minecraftforge/forge/in
 forgeGradle = "6.0.29" # https://files.minecraftforge.net/net/minecraftforge/gradle/ForgeGradle/index.html
 mixinGradle = "0.7.38" # https://repo.spongepowered.org/#browse/browse:maven-public:org%2Fspongepowered%2Fmixingradle
 librarian = "1.2.0" # https://github.com/ParchmentMC/Librarian/tags
+curseforgeGradle = "1.1.25" # https://plugins.gradle.org/plugin/net.darkhax.curseforgegradle
+minotaur = "2.8.7" # https://plugins.gradle.org/plugin/com.modrinth.minotaur
 
 architectury = "5137938" # https://www.curseforge.com/minecraft/mc-mods/architectury-api/files/all
 almostUnified = "1.20.1-0.9.3" # https://maven.blamejared.com/com/almostreliable/mods/almostunified-common/
@@ -40,3 +42,5 @@ junit-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref 
 forgeGradle = { id = "net.minecraftforge.gradle", version.ref = "forgeGradle" }
 mixinGradle = { id = "org.spongepowered.mixin", version.ref = "mixinGradle" }
 librarian = { id = "org.parchmentmc.librarian.forgegradle", version.ref = "librarian" }
+curseforgeGradle = { id = "net.darkhax.curseforgegradle", version.ref = "curseforgeGradle" }
+minotaur = { id = "com.modrinth.minotaur", version.ref = "minotaur" }

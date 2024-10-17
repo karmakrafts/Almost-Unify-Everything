@@ -1,12 +1,13 @@
 {
   "homepage": "https://www.curseforge.com/minecraft/mc-mods/almost-unify-everything",
   "promos": {
-    "1.20.1-latest": "1.0.2.7",
-    "1.20.1-recommended": "1.0.2.7"
+    "1.20.1-latest": "1.0.2.8",
+    "1.20.1-recommended": "1.0.2.8"
   },
   "1.20.1": {
     "1.0.1.5": "- Added a versions.json to allow for update checking",
     "1.0.1.6": "- Added progress indication when unifying chunks\n- Filter out non-existent chunks when unifying block entity inventories",
-    "1.0.2.7": "- Bump minor version number"
+    "1.0.2.7": "- Bump minor version number",
+    "1.0.2.8": "- Add automatic deployment for CurseForge and Modrinth\n- Fixed broken czech translations"
   }
 }
