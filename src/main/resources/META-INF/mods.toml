@@ -1,6 +1,8 @@
 modLoader = "javafml" #mandatory
 loaderVersion = "${loader_version_range}" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
 license = "${mod_license}"
+issueTrackerURL = "https://git.karmakrafts.dev/kk/mc-projects/almost-unify-everything/-/issues"
+displayURL = "https://git.karmakrafts.dev/kk/mc-projects/almost-unify-everything"
 
 [[mods]] #mandatory
 modId = "${mod_id}" #mandatory
